@@ -23,6 +23,7 @@ namespace WebApp_MultipleEnvironments
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
             services.AddRazorPages();
             services.Configure<MyConfig>(Configuration.GetSection("MyConfig"));
             services.Configure<Test>(Configuration.GetSection("Test"));
@@ -48,6 +49,7 @@ namespace WebApp_MultipleEnvironments
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseHealthChecks("/health");
 
             app.UseAuthorization();
 
